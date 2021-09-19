@@ -1,8 +1,6 @@
-const mongoose = require("mongoose");
-const router = require("express").Router();
-const Student = require("../models/student.model");
-const verify = require("../Middlewares/verify");
-
+import express from "express";
+import verify from "../Middlewares/verify";
+const router = express.Router();
 const {
   validateStudent,
   validateFindByRollAndName,

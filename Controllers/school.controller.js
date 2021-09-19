@@ -1,4 +1,4 @@
-const School = require("../models/school.model");
+import School from "../models/school.model";
 
 module.exports.findById = (req, res) => {
   const id = req.params.id;

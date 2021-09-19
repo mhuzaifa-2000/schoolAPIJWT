@@ -1,7 +1,8 @@
-const router = require("express").Router();
-const jwt = require("jsonwebtoken");
-const verify = require("../Middlewares/verify");
-const School = require("../models/school.model");
+import express from "express";
+import jwt from "jsonwebtoken";
+import verify from "../Middlewares/verify";
+import School from "../models/school.model";
+const router = express.Router();
 const {
   validateNewSchool,
   validateUpdateSchool,

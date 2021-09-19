@@ -1,8 +1,9 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const schoolRoute = require("./routes/school");
-const studentRoute = require("./routes/student");
-const cors = require("cors");
+import express from "express";
+import mongoose from "mongoose";
+import schoolRoute from "./routes/school";
+import studentRoute from "./routes/student";
+import cors from "cors";
+
 require("dotenv").config();
 const app = express();
 
