@@ -5,6 +5,7 @@ const School = require("../models/school.model");
 const {
   validateNewSchool,
   validateUpdateSchool,
+  validateDeleteSchool,
 } = require("../Middlewares/school.validate");
 const {
   findById,
@@ -16,6 +17,6 @@ const {
 router.get("/:id", findById);
 router.post("/", validateNewSchool, addNewSchool);
 router.put("/", verify, validateUpdateSchool, updateSchool);
-router.delete("/", deleteSchool);
+router.delete("/", validateDeleteSchool, deleteSchool);
 
 module.exports = router;
