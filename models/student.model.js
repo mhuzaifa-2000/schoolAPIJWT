@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
+const School = require("./school.model");
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema(
@@ -30,7 +31,7 @@ const studentSchema = new Schema(
       type: String,
     },
     school: {
-      type: Schema.Types.ObjectID,
+      type: Schema.Types.ObjectId,
       ref: "School",
       required: true,
     },
@@ -39,6 +40,7 @@ const studentSchema = new Schema(
     timestamps: true,
   }
 );
+
 autoIncrement.initialize(mongoose.connection);
 studentSchema.plugin(autoIncrement.plugin, {
   model: "Student",
@@ -46,6 +48,5 @@ studentSchema.plugin(autoIncrement.plugin, {
   startAt: 101,
   incrementBy: 1,
 });
-
 const Student = mongoose.model("Student", studentSchema);
 module.exports = Student;
