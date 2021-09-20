@@ -2,6 +2,7 @@ import Student from "../models/student.model";
 
 const getAllStudents = (req, res) => {
   Student.find()
+    .populate("school")
     .then((response) => res.json(response))
     .catch((err) => res.status(400).json(err));
 };
@@ -35,6 +36,7 @@ const findByRollNoAndName = (req, res) => {
   const { name, rollNo } = req.body;
   if (rollNo)
     Student.find({ rollNo: rollNo })
+      .populate("school")
       .then((data) => res.json(data))
       .catch((err) => res.status(400).json(err));
   else {
