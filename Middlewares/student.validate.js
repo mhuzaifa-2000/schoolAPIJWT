@@ -46,4 +46,5 @@ module.exports.validateDeleteStudent = (req, res, next) => {
         message: "ID missing",
       },
     });
+  next();
 };

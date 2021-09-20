@@ -1,5 +1,5 @@
 import School from "../models/school.model";
-
+import jwt from "jsonwebtoken";
 module.exports.findById = (req, res) => {
   const id = req.params.id;
   School.findOne({ _id: id })
@@ -19,6 +19,7 @@ module.exports.addNewSchool = (req, res) => {
     .save()
     .then((response) => {
       var token = jwt.sign({ _id: response._id }, process.env.SECRET_TOKEN);
+      console.log(token);
       res.header("auth-token", token).send(token);
     })
     .catch((err) => res.status(400).json(err));

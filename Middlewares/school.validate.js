@@ -66,4 +66,5 @@ module.exports.validateDeleteSchool = (req, res, next) => {
         message: "ID missing",
       },
     });
+  next();
 };
