@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 import schoolRoute from "./routes/school";
 import studentRoute from "./routes/student";
 import cors from "cors";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+dotenv.config();
 const app = express();
 
 app.use(cors());
