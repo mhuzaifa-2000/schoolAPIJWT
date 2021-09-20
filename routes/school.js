@@ -3,21 +3,23 @@ import jwt from "jsonwebtoken";
 import verify from "../Middlewares/verify";
 import School from "../models/school.model";
 const router = express.Router();
-const {
+import {
   validateNewSchool,
   validateUpdateSchool,
   validateDeleteSchool,
-} = require("../Middlewares/school.validate");
-const {
+} from "../Middlewares/school.validate";
+import {
   findById,
   addNewSchool,
   updateSchool,
   deleteSchool,
-} = require("../Controllers/school.controller");
+  getAllSchools,
+} from "../Controllers/school.controller";
 
+router.get("/", getAllSchools);
 router.get("/:id", findById);
 router.post("/", validateNewSchool, addNewSchool);
-router.put("/", verify, validateUpdateSchool, updateSchool);
+router.put("/:id", verify, validateUpdateSchool, updateSchool);
 router.delete("/", validateDeleteSchool, deleteSchool);
 
 module.exports = router;

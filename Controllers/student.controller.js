@@ -1,12 +1,12 @@
 import Student from "../models/student.model";
 
-module.exports.getAllStudents = (req, res) => {
+const getAllStudents = (req, res) => {
   Student.find()
     .then((response) => res.json(response))
     .catch((err) => res.status(400).json(err));
 };
 
-module.exports.addNewStudent = (req, res) => {
+const addNewStudent = (req, res) => {
   const {
     name,
     class: className,
@@ -31,16 +31,25 @@ module.exports.addNewStudent = (req, res) => {
     .catch((err) => res.status(400).json(err));
 };
 
-module.exports.findByRollNoAndName = (req, res) => {
+const findByRollNoAndName = (req, res) => {
   const { name, rollNo } = req.body;
-  Student.find({ name: name, rollNo: rollNo })
-    .then((data) => res.json(data))
-    .catch((err) => res.status(400).json(err));
+  if (rollNo)
+    Student.find({ rollNo: rollNo })
+      .then((data) => res.json(data))
+      .catch((err) => res.status(400).json(err));
+  else {
+    Student.find({ name: { $regex: name, $options: "i" } })
+      .populate("school")
+      .then((data) => res.json(data))
+      .catch((err) => res.status(400).json(err));
+  }
 };
 
-module.exports.deleteStudent = (req, res) => {
+const deleteStudent = (req, res) => {
   const { id } = req.body;
   Student.deleteOne({ _id: id })
     .then(() => res.json("Student Deleted"))
     .catch((err) => res.status(400).json(err));
 };
+
+export { getAllStudents, addNewStudent, findByRollNoAndName, deleteStudent };

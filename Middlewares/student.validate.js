@@ -1,4 +1,4 @@
-module.exports.validateStudent = (req, res, next) => {
+const validateStudent = (req, res, next) => {
   const { name, class: className, school } = req.body;
   if (!name)
     res.status(400).json({
@@ -21,24 +21,17 @@ module.exports.validateStudent = (req, res, next) => {
   next();
 };
 
-module.exports.validateFindByRollAndName = (req, res, next) => {
+const validateFindByRollAndName = (req, res, next) => {
   const { name, rollNo } = req.body;
-  if (!name)
+  if (!name && !rollNo)
     res.status(400).json({
       error: {
-        message: "Name missing",
-      },
-    });
-  if (!rollNo)
-    res.status(400).json({
-      error: {
-        message: "Roll Number missing",
+        message: "Name and Roll Number both missing",
       },
     });
   next();
 };
-
-module.exports.validateDeleteStudent = (req, res, next) => {
+const validateDeleteStudent = (req, res, next) => {
   const { id } = req.body;
   if (!id)
     res.status(400).json({
@@ -48,3 +41,5 @@ module.exports.validateDeleteStudent = (req, res, next) => {
     });
   next();
 };
+
+export { validateStudent, validateFindByRollAndName, validateDeleteStudent };
